@@ -1,0 +1,14 @@
+{
+  "name": "java8isancient",
+  "short_name": "java8isancient",
+  "description": "Just your average website reminding you how old Java 8 is",
+  "icons": [],
+  "start_url": "/?standalone=true",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "lang": "en",
+  "languages": [
+    "en",
+    "de"
+  ]
+}
