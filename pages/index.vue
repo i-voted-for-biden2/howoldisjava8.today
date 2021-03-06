@@ -48,6 +48,7 @@ export default Vue.extend({
 .age-text {
   font-weight: bolder;
   font-size: xx-large;
+  text-align: center;
 }
 
 /* Default colors */

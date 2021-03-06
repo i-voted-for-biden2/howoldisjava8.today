@@ -7,7 +7,7 @@ export default {
     title: "It's time to ditch Java 8",
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1.0, user-scalable=no' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
       { hid: 'description', name: 'description', content: "It's very old. Click the link for how old it is" },
       { hid: 'image', name: 'image', content: 'https://howoldisjava8.today/icon.png' },
       { hid: 'robots', name: 'robots', content: 'index, follow' },
@@ -45,12 +45,12 @@ export default {
   buildModules: [
     '@nuxt/typescript-build',
     '@nuxtjs/tailwindcss',
-    '@nuxtjs/moment'
+    '@nuxtjs/moment',
+    '@nuxtjs/pwa'
   ],
 
   modules: [
-    '@nuxtjs/axios',
-    ['nuxt-i18n', i18n],
+    '@nuxtjs/axios', ['nuxt-i18n', i18n],
     '@nuxtjs/pwa'
   ],
 
@@ -61,10 +61,17 @@ export default {
   },
 
   pwa: {
-    icon: false,
+    icon: [{
+      source: 'pwa-startup-icon.png',
+      targetDir: 'pwa-icons'
+    }],
     manifest: {
       languages: i18n.locales.map(it => it.code),
-      lang: 'en'
-    }
+      lang: 'en',
+      name: 'howoldisjava8',
+      background_color: '#121212',
+      theme_color: '#121212'
+    },
+    workbox: {}
   }
 }
