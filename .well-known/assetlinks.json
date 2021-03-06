@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "today.howoldisjava8.stockbroud",
+      "sha256_cert_fingerprints": [
+        "58:F5:6E:87:A2:24:3A:D7:EE:F6:81:B1:EE:D1:66:FE:5B:32:9D:B9:47:08:F0:D0:A8:EA:F3:80:CC:A6:A9:1C"
+      ]
+    }
+  }
+]
