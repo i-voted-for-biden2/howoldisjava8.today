@@ -2,14 +2,14 @@
 export default context => {
     return new Promise(function (resolve) {
         resolve({
-            java_is_old: 'Java 8 is {specifier} old today.',
-            loading: 'very',
+            java_is_old: 'Java is heute {specifier} alt.',
+            loading: 'sehr',
             // very old
-            and: 'and',
+            and: 'und',
             time: {
-                years: 'one year | {n} years',
-                months: 'one month | {n} months',
-                days: 'one day | {n} days'
+                years: 'ein Jahr | {n} Jahre',
+                months: 'ein Monat | {n} Monate',
+                days: 'ein Tag | {n} Tage'
             }
         });
     });
