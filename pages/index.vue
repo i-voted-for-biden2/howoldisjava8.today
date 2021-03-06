@@ -35,8 +35,13 @@ export default Vue.extend({
   },
 
   async mounted () {
-    const response = await this.$axios.$get('https://worldtimeapi.org/api/ip')
-    const current = this.$moment(response.unixtime * 1000) // unixtime is actuallx secs but day.js expects millis
+    let current
+    if (this.$nuxt.isOnline) {
+      const response = await this.$axios.$get('https://worldtimeapi.org/api/ip')
+      current = this.$moment(response.unixtime * 1000) // unixtime is actuallx secs but day.js expects millis
+    } else {
+      current = this.$moment()
+    }
     const release = this.$moment(java8Release)
     this.$data.difference = this.$moment.preciseDiff(current, release, true)
   }
