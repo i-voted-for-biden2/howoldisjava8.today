@@ -36,7 +36,8 @@ export default Vue.extend({
 
   async mounted () {
     let current
-    if (this.$nuxt.isOnline) {
+    // Firefox gives us some weird CORS errors
+    if (this.$nuxt.isOnline && !navigator.userAgent.toLowerCase().includes('firefox')) {
       const response = await this.$axios.$get('https://worldtimeapi.org/api/ip')
       current = this.$moment(response.unixtime * 1000) // unixtime is actuallx secs but day.js expects millis
     } else {
