@@ -62,13 +62,13 @@ export default {
 
   pwa: {
     icon: [{
-      source: 'pwa-startup-icon.png',
+      source: 'static/pwa-startup-icon.png',
       targetDir: 'pwa-icons'
     }],
     manifest: {
       languages: i18n.locales.map(it => it.code),
       lang: 'en',
-      name: 'howoldisjava8',
+      name: 'How old is Java 8?',
       background_color: '#121212',
       theme_color: '#121212'
     },
