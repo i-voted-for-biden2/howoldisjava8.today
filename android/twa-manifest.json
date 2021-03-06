@@ -1,0 +1,37 @@
+{
+  "packageId": "today.howoldisjava8.stockbroud",
+  "host": "howoldisjava8.today",
+  "name": "How old is Java 8?",
+  "launcherName": "java8isold",
+  "display": "standalone",
+  "themeColor": "#121212",
+  "navigationColor": "#000000",
+  "navigationColorDark": "#000000",
+  "navigationDividerColor": "#000000",
+  "navigationDividerColorDark": "#000000",
+  "backgroundColor": "#121212",
+  "enableNotifications": true,
+  "startUrl": "/?standalone=true",
+  "iconUrl": "https://howoldisjava8.today/_nuxt/icons/icon_512x512.f6da9e.png",
+  "maskableIconUrl": "https://howoldisjava8.today/_nuxt/icons/icon_512x512.f6da9e.png",
+  "splashScreenFadeOutDuration": 300,
+  "signingKey": {
+    "path": "D:\\WORK\\java8isancient\\android\\android.keystore",
+    "alias": "android"
+  },
+  "appVersionName": "1",
+  "appVersionCode": 1,
+  "shortcuts": [],
+  "generatorApp": "bubblewrap-cli",
+  "webManifestUrl": "https://howoldisjava8.today/_nuxt/manifest.cea7da41.json",
+  "fallbackType": "customtabs",
+  "features": {},
+  "alphaDependencies": {
+    "enabled": false
+  },
+  "enableSiteSettingsShortcut": true,
+  "isChromeOSOnly": false,
+  "orientation": "portrait-primary",
+  "fingerprints": [],
+  "appVersion": "1"
+}
