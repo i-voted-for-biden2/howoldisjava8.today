@@ -13,7 +13,7 @@ export default {
       file: 'fr.js'
     },
     {
-      code: 'es.js',
+      code: 'es',
       file: 'es.js'
     }
   ],
