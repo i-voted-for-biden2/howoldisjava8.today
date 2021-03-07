@@ -7,6 +7,14 @@ export default {
     {
       code: 'de',
       file: 'de.js'
+    },
+    {
+      code: 'fr',
+      file: 'fr.js'
+    },
+    {
+      code: 'es.js',
+      file: 'es.js'
     }
   ],
   defaultLocale: 'en',
