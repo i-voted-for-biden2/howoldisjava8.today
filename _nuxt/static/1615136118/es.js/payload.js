@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/es.js", {data:[{}],fetch:{},mutations:void 0});
