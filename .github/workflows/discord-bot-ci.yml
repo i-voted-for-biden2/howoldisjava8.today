@@ -29,4 +29,4 @@ jobs:
             ~/discord-bot/build
             ~/discord-bot/.gradle
       - name: Build with Gradle
-        run: ./discord-bot/gradlew compileKotlin detektMain
+        run: ./discord-bot/gradlew discord-bot:compileKotlin discord-bot:detektMain

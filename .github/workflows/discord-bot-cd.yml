@@ -20,4 +20,4 @@ jobs:
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           appdir: "heroku"
           usedocker: true
-          dontuseforce: false # heroku can be stupid sometimes
+          dontuseforce: 0 # heroku can be stupid sometimes
