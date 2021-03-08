@@ -3,7 +3,7 @@ name: Discord bot Docker image
 on:
   push:
     paths:
-      - discord-bot
+      - discord-bot/**
     branches:
       - main
 

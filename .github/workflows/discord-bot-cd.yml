@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - discord-bot
+      - discord-bot/**
 
 jobs:
   build:
