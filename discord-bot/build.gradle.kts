@@ -30,7 +30,7 @@ configurations.all {
 }
 
 application {
-  mainClass.set("today.howoldisjava8.discord_bot.LauncherKt")
+  mainClass.set("today.howoldisjava8.discordbot.LauncherKt")
 }
 
 dependencies {
