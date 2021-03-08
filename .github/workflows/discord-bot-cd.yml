@@ -18,6 +18,4 @@ jobs:
           api_key: ${{secrets.HEROKU_API_KEY}}
           app_name: "desolate-earth-51306"
           email: ${{secrets.HEROKU_EMAIL}}
-          dockerfile_path: "heroku"
-          usedocker: true
-          dontuseforce: 0 # heroku can be stupid sometimes
+          dockerfile_path: "discord-bot"
