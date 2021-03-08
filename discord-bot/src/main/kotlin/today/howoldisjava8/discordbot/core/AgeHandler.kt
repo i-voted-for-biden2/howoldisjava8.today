@@ -36,7 +36,7 @@ fun formatMessage(): String {
     val months = period.months
     val days = period.days
     if (months > 0) {
-      addSeparator(days > 0)
+      addSeparator(days <= 0)
       addPluralization("one month", "months", months)
     }
     if (days > 0) {
