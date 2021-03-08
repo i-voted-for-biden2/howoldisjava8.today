@@ -1,4 +1,4 @@
-package today.howoldisjava8.discord_bot
+package today.howoldisjava8.discordbot
 
 import dev.kord.core.event.gateway.ReadyEvent
 import dev.kord.core.on
@@ -10,7 +10,7 @@ import dev.kord.x.commands.model.prefix.or
 import dev.kord.x.lavalink.kord.lavakord
 import kapt.kotlin.generated.configure
 import org.koin.dsl.module
-import today.howoldisjava8.discord_bot.commands.HowOldIsJava8SlashCommand
+import today.howoldisjava8.discordbot.commands.HowOldIsJava8SlashCommand
 
 suspend fun main() {
   bot(System.getenv("TOKEN")) {

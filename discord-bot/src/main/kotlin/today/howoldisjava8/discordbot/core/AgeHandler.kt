@@ -1,4 +1,4 @@
-package today.howoldisjava8.discord_bot.core
+package today.howoldisjava8.discordbot.core
 
 import dev.kord.common.annotation.KordPreview
 import dev.kord.common.entity.Permission
@@ -8,13 +8,14 @@ import dev.kord.core.behavior.channel.createMessage
 import dev.kord.core.behavior.respond
 import dev.kord.core.entity.channel.TextChannel
 import dev.kord.x.commands.kord.model.context.KordCommandEvent
-import kotlinx.datetime.*
-import kotlin.time.Duration
+import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.periodUntil
 
 // https://www.java.com/de/download/help/release_dates.html
-const val java8Release = 1395097200000
-val java8ReleaseInstant = Instant.fromEpochMilliseconds(java8Release)
-
+const val JAVA_8_RELEASE = 1395097200000
+val java8ReleaseInstant = Instant.fromEpochMilliseconds(JAVA_8_RELEASE)
 
 /**
  * Formats a message telling you how old Java 8 is.
@@ -93,7 +94,7 @@ suspend fun KordCommandEvent.sendNotice(tts: Boolean) = channel.sendNotice(tts)
 /**
  * Checks whether a channel can supply tts if wanted.
  */
-suspend fun MessageChannelBehavior.safeTTS(wantTTS: Boolean) = wantTTS
-  && (asChannel() as? TextChannel)?.getEffectivePermissions(kord.selfId)?.contains(
+suspend fun MessageChannelBehavior.safeTTS(wantTTS: Boolean) = wantTTS &&
+  (asChannel() as? TextChannel)?.getEffectivePermissions(kord.selfId)?.contains(
   Permission.SendTTSMessages
 ) == true

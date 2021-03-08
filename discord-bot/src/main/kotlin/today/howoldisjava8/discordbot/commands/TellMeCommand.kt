@@ -1,4 +1,4 @@
-package today.howoldisjava8.discord_bot.commands
+package today.howoldisjava8.discordbot.commands
 
 import dev.kord.x.commands.annotation.AutoWired
 import dev.kord.x.commands.annotation.ModuleName
@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.launch
 import org.koin.core.get
-import today.howoldisjava8.discord_bot.core.formatMessage
+import today.howoldisjava8.discordbot.core.formatMessage
 
 @AutoWired
 @ModuleName("General")

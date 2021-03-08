@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import io.gitlab.arturbosch.detekt.Detekt
 
 plugins {
   kotlin("jvm") version "1.4.31"
@@ -57,5 +58,10 @@ tasks {
       jvmTarget = "1.8" // Kord uses Java 8 features for Kord/JVM so we need to enable this
       freeCompilerArgs = freeCompilerArgs + "-Xopt-in=kotlin.RequiresOptIn" // required for slash commands
     }
+  }
+
+  withType<Detekt> {
+    // Target version of the generated JVM bytecode. It is used for type resolution.
+    this.jvmTarget = "1.8"
   }
 }
