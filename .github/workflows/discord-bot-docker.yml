@@ -1,0 +1,25 @@
+name: Discord bot Docker image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    name: Publish Docker image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Login
+        env:
+          GITHUB_TOKEN: ${{ secrets.WHATEVER }}
+        run: docker login ghcr.io --username phanatic --password "$GITHUB_TOKEN"
+      - name: Build & Tag
+        run: docker build -t ghcr.io/drschlaubi/java8isancient/bot:latest -t ghcr.io/drschlaubi/java8isancient/bot:"$GITHUB_SHA" .
+      - name: Push
+        run: docker push ghcr.io/drschlaubi/java8isancient/bot:latest
+      - name: Push specific tag
+        run: docker push ghcr.io/drschlaubi/java8isancient/bot:"$GITHUB_SHA"
