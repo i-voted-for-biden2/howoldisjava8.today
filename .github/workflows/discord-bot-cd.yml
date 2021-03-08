@@ -2,8 +2,8 @@ name: cd
 
 on:
   push:
-#    branches:
-#      - main
+    branches:
+      - main
     paths:
       - discord-bot
 

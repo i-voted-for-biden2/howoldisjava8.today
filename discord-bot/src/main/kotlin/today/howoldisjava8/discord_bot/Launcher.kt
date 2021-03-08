@@ -24,9 +24,11 @@ suspend fun main() {
 
     // This makes lavakord available for dependency injection
     koin {
-      modules(module {
-        single { lavakord }
-      })
+      modules(
+        module {
+          single { lavakord }
+        }
+      )
     }
 
     // This set's the prefix configuration
