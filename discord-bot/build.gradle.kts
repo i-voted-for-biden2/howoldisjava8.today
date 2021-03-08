@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
   kotlin("jvm") version "1.4.31"
   kotlin("kapt") version "1.4.31"
+  id("io.gitlab.arturbosch.detekt") version "1.15.0"
   application
 }
 
@@ -27,6 +28,10 @@ configurations.all {
   resolutionStrategy.cacheDynamicVersionsFor(1, "minutes")
 }
 
+application {
+  mainClass.set("today.howoldisjava8.discord_bot.LauncherKt")
+}
+
 dependencies {
   // See https://github.com/kordlib/kord#gradle-kotlin
   implementation("dev.kord", "kord-core", "0.7.0-SNAPSHOT")
@@ -41,6 +46,9 @@ dependencies {
   implementation("org.jetbrains.kotlinx", "kotlinx-datetime", "0.1.1")
 
   implementation("org.slf4j", "slf4j-simple", "1.7.30")
+
+  // Add ktlint
+  detektPlugins("io.gitlab.arturbosch.detekt", "detekt-formatting", "1.15.0")
 }
 
 tasks {
