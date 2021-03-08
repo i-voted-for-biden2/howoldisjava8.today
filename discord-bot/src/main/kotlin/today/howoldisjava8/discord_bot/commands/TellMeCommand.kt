@@ -5,9 +5,14 @@ import dev.kord.x.commands.annotation.ModuleName
 import dev.kord.x.commands.kord.module.command
 import dev.kord.x.commands.model.command.invoke
 import dev.kord.x.lavalink.LavaKord
+import dev.kord.x.lavalink.audio.TrackEndEvent
 import dev.kord.x.lavalink.kord.connectAudio
 import dev.kord.x.lavalink.kord.getLink
 import dev.kord.x.lavalink.rest.loadItem
+import kotlinx.coroutines.flow.filterIsInstance
+import kotlinx.coroutines.flow.single
+import kotlinx.coroutines.flow.take
+import kotlinx.coroutines.launch
 import org.koin.core.get
 import today.howoldisjava8.discord_bot.core.formatMessage
 
@@ -27,7 +32,8 @@ fun tellMeCommand() = command("tellme") {
     val link = guild.getLink(lavakord)
 
     // Find the channel of the user
-    val channel = author.asMember(guild.id).getVoiceState().channelId
+    // getOrNull doesn't require a privileged intent as normal bots only get the voice state of users in VCs
+    val channel = author.asMember(guild.id).getVoiceStateOrNull()?.channelId
     if (channel == null) {
       respond("Please connect to a VC")
       return@invoke
@@ -44,5 +50,15 @@ fun tellMeCommand() = command("tellme") {
 
     // Play the track
     link.player.playTrack(tts)
+
+    lavakord.launch {
+      link.player
+        .events
+        .filterIsInstance<TrackEndEvent>()
+        .take(1)
+        .single() // This waits until the first Track end event
+
+      link.destroy()
+    }
   }
 }
