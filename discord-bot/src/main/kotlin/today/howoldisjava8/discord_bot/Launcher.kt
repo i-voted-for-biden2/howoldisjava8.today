@@ -1,6 +1,5 @@
 package today.howoldisjava8.discord_bot
 
-import dev.kord.core.Kord
 import dev.kord.core.event.gateway.ReadyEvent
 import dev.kord.core.on
 import dev.kord.x.commands.kord.bot
@@ -25,9 +24,9 @@ suspend fun main() {
 
     // This makes lavakord available for dependency injection
     koin {
-      module {
+      modules(module {
         single { lavakord }
-      }
+      })
     }
 
     // This set's the prefix configuration

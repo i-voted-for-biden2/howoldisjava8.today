@@ -8,23 +8,20 @@ import dev.kord.core.behavior.channel.createMessage
 import dev.kord.core.behavior.respond
 import dev.kord.core.entity.channel.TextChannel
 import dev.kord.x.commands.kord.model.context.KordCommandEvent
-import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
-import kotlinx.datetime.toDateTimePeriod
+import kotlinx.datetime.*
+import kotlin.time.Duration
 
 // https://www.java.com/de/download/help/release_dates.html
 const val java8Release = 1395097200000
 val java8ReleaseInstant = Instant.fromEpochMilliseconds(java8Release)
+
 
 /**
  * Formats a message telling you how old Java 8 is.
  */
 fun formatMessage(): String {
   val now = Clock.System.now()
-  // +/- on Instants gives as a Duration object
-  val difference = now - java8ReleaseInstant
-  // A period also has a years value
-  val period = difference.toDateTimePeriod()
+  val period = java8ReleaseInstant.periodUntil(now, TimeZone.UTC)
 
   return buildString {
     append("Java 8 is")
