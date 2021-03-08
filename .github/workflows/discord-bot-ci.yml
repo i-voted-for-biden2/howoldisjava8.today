@@ -1,9 +1,9 @@
+name: Discord Bot CI
+
 on:
   push:
     paths:
       - discord-bot/**
-    paths:
-      - discord-bot
   pull_request:
     paths:
       - discord-bot/**
