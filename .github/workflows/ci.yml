@@ -1,6 +1,12 @@
 name: ci
 
-on: [push, pull_request]
+on:
+  push:
+    paths-ignore:
+      - discord-bot
+  pull_request:
+    paths-ignore:
+      - discord-bot
 
 jobs:
   ci:
