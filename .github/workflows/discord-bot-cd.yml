@@ -1,0 +1,22 @@
+name: cd
+
+on:
+  push:
+#    branches:
+#      - main
+    paths:
+      - discord-bot
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Deploy to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "desolate-earth-51306"
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          appdir: "heroku"
+          usedocker: true
