@@ -13,11 +13,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Deploy to Heroku
-        uses: akhileshns/heroku-deploy@v3.12.12
+        uses: jctaveras/heroku-deploy@":!:!"
         with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "desolate-earth-51306"
-          heroku_email: ${{secrets.HEROKU_EMAIL}}
-          appdir: "heroku"
+          api_key: ${{secrets.HEROKU_API_KEY}}
+          app_name: "desolate-earth-51306"
+          email: ${{secrets.HEROKU_EMAIL}}
+          dockerfile_path: "heroku"
           usedocker: true
           dontuseforce: 0 # heroku can be stupid sometimes
