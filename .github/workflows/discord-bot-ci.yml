@@ -1,6 +1,8 @@
 on:
   push:
     paths:
+      - discord-bot/**
+    paths:
       - discord-bot
   pull_request:
     paths:
