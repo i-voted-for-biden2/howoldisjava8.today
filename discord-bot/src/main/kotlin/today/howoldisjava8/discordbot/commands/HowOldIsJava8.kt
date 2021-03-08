@@ -48,7 +48,7 @@ object HowOldIsJava8SlashCommand {
     val command = interaction.command
     if (command.rootName == "howoldisjava8") {
       // this acks and responds as you can see in core/AgeHandler.kt
-      interaction.sendNotice(command.options["use-tts"]?.value as Boolean)
+      interaction.sendNotice(command.options["use-tts"]?.value as? Boolean == true)
     }
   }
 

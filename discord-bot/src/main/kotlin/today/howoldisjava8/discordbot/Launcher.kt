@@ -35,7 +35,7 @@ suspend fun main() {
     // If you @file:AutoWire you can put this as a val anywhere in your file
     prefix {
       kord {
-        mention() or literal("j8") or literal("java8") or literal("java") or literal("j")
+        mention() or literal("j8") or literal("java8") or literal("java")
       }
     }
 
