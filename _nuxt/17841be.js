@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[2],{267:function(n,e,o){"use strict";o.r(e);o(10);e.default=function(n){return new Promise((function(n){n({java_is_old:"Java is heute {specifier} alt.",loading:"sehr",and:"und",time:{years:"ein Jahr | {n} Jahre",months:"ein Monat | {n} Monate",days:"ein Tag | {n} Tage"}})}))}}}]);
