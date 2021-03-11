@@ -2,7 +2,7 @@
 export default context => {
     return new Promise(function (resolve) {
         resolve({
-            java_is_old: 'Java is heute {specifier} alt.',
+            java_is_old: 'Java 8 ist heute {specifier} alt.',
             loading: 'sehr',
             // very old
             and: 'und',
