@@ -34,15 +34,15 @@ export default Vue.extend({
     }
   },
 
-  async mounted () {
-    let current
+  mounted () {
+    const current = this.$moment()
+    // TODO: fix this lol
     // Firefox gives us some weird CORS errors
-    if (this.$nuxt.isOnline && !navigator.userAgent.toLowerCase().includes('firefox')) {
-      const response = await this.$axios.$get('https://worldtimeapi.org/api/ip')
-      current = this.$moment(response.unixtime * 1000) // unixtime is actuallx secs but day.js expects millis
-    } else {
-      current = this.$moment()
-    }
+    // if (this.$nuxt.isOnline && !navigator.userAgent.toLowerCase().includes('firefox')) {
+    //   const response = await this.$axios.$get('https://worldtimeapi.org/api/ip')
+    //   current = this.$moment(response.unixtime * 1000) // unixtime is actuallx secs but day.js expects millis
+    // } else {
+    // }
     const release = this.$moment(java8Release)
     this.$data.difference = this.$moment.preciseDiff(current, release, true)
   }

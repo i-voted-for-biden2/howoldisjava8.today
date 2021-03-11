@@ -3,7 +3,8 @@ export default (context) => {
   return new Promise(function (resolve) {
     resolve({
       java_is_old: 'Java 8 is {specifier} old today.',
-      loading: 'very', // very old
+      loading: 'very',
+      // very old
       and: 'and',
       time: {
         years: 'one year | {n} years',

@@ -29,12 +29,12 @@
         "@nuxtjs/moment": "^1.6.1",
         "@nuxtjs/tailwindcss": "^3.4.3",
         "@tailwindcss/postcss7-compat": "^2.0.3",
-        "autoprefixer": "10",
+        "autoprefixer": "9",
         "babel-eslint": "^10.1.0",
         "eslint": "^7.18.0",
         "eslint-plugin-nuxt": "^2.0.0",
         "eslint-plugin-vue": "^7.5.0",
-        "postcss": "8",
+        "postcss": "7",
         "tailwindcss": "npm:@tailwindcss/postcss7-compat"
     }
 }
