@@ -1,6 +1,7 @@
 plugins {
   kotlin("jvm") version "1.4.31"
   kotlin("plugin.serialization") version "1.4.31"
+  application
 }
 
 repositories {
@@ -27,4 +28,8 @@ tasks {
       freeCompilerArgs = freeCompilerArgs + "-Xopt-in=kotlin.RequiresOptIn"
     }
   }
+}
+
+application {
+  mainClass.set("today.howoldisjava8.twitterbot.LauncherKt")
 }
