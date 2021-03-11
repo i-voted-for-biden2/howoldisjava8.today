@@ -33,12 +33,6 @@ android {
     versionCode = 1
     versionName = "1"
 
-    // The name for the application
-    resValue("string", "appName", TWAManifest.name)
-
-    // The name for the application on the Android Launcher
-    resValue("string", "launcherName", TWAManifest.launcherName)
-
     // The URL that will be used when launching the TWA from the Android Launcher
     val launchUrl = "https://" + TWAManifest.hostName + TWAManifest.launchUrl
     resValue("string", "launchUrl", launchUrl)

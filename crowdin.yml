@@ -1,3 +1,5 @@
 files:
-  - source: /i18n/en.js
-    translation: /i18n/%two_letters_code%.js
+  - source: /i18n/en/strings.js
+    translation: /i18n/%two_letters_code%/strings.js
+  - source: /android/app/src/main/res/values/strings.xml
+    translation: /android/app/src/main/res/values-%two_letters_code%/strings.xml

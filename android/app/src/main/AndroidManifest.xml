@@ -63,7 +63,7 @@
     <activity
       android:name="LauncherActivity"
       android:alwaysRetainTaskState="true"
-      android:label="@string/launcherName"
+      android:label="@string/appName"
       android:screenOrientation="portrait">
       <meta-data
         android:name="android.support.customtabs.trusted.DEFAULT_URL"

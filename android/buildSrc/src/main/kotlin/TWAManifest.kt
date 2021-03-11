@@ -3,7 +3,6 @@ object TWAManifest {
   const val hostName = "howoldisjava8.today" // The domain being opened in the TWA.
   const val launchUrl = "/?standalone=true" // The start path for the TWA. Must be relative to the domain.
   const val name = "How old is Java 8?" // The application name.
-  const val launcherName = "java8isold" // The name shown on the Android Launcher.
   const val themeColor = "#121212" // The color used for the status bar.
   const val navigationColor = "#000000" // The color used for the navigation bar.
   const val navigationColorDark = "#000000" // The color used for the dark navbar.

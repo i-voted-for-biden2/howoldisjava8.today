@@ -2,19 +2,19 @@ export default {
   locales: [
     {
       code: 'en',
-      file: 'en.js'
+      file: 'en/strings.js'
     },
     {
       code: 'de',
-      file: 'de.js'
+      file: 'de/strings.js'
     },
     {
       code: 'fr',
-      file: 'fr.js'
+      file: 'fr/strings.js'
     },
     {
       code: 'es',
-      file: 'es.js'
+      file: 'es/strings.js'
     }
   ],
   defaultLocale: 'en',
