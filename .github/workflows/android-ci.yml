@@ -1,3 +1,4 @@
+name: Android App CD
 on:
   push:
     paths:
@@ -17,11 +18,11 @@ jobs:
         with:
           java-version: 1.8
       - name: Assemble Release Bundle
-        run: ./gradlew bundleRelease
+        run: android/gradlew bundleRelease
       - name: Sign Release
         uses: r0adkll/sign-android-release@v1
         with:
-          releaseDirectory: app/build/outputs/bundle/release
+          releaseDirectory: android/app/build/outputs/bundle/release
           signingKeyBase64: ${{ secrets.SIGNING_KEY }}
           alias: ${{ secrets.KEY_ALIAS }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
@@ -31,6 +32,6 @@ jobs:
         with:
           serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
           packageName: today.howoldisjava8.stockbroud
-          releaseFile: app/build/outputs/bundle/release/app-release.aab
+          releaseFile: android/app/build/outputs/bundle/release/app-release.aab
           track: alpha
-          whatsNewDirectory: distribution/
+          whatsNewDirectory: android/distribution/
