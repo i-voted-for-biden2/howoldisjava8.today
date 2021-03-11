@@ -38,7 +38,6 @@ object HowOldIsJava8SlashCommand : AbstractSlashCommand() {
   override val name: String = "howoldisjava8"
   override val description: String = "Tells you the age of Java 8"
 
-
   override suspend fun InteractionCreateEvent.onInvocation() {
     with(interaction) {
       interaction.sendNotice(command.options["use-tts"]?.value as? Boolean == true)

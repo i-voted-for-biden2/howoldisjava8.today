@@ -1,20 +1,10 @@
 package today.howoldisjava8.discordbot.commands
 
 import dev.kord.common.annotation.KordPreview
-import dev.kord.common.entity.InteractionResponseType
-import dev.kord.common.entity.optional.optional
-import dev.kord.core.Kord
-import dev.kord.core.behavior.*
-import dev.kord.core.behavior.respond
-import dev.kord.core.entity.Member
+import dev.kord.core.behavior.MemberBehavior
+import dev.kord.core.behavior.followUp
 import dev.kord.core.entity.interaction.GuildInteraction
 import dev.kord.core.event.interaction.InteractionCreateEvent
-import dev.kord.core.on
-import dev.kord.rest.builder.interaction.FollowupMessageCreateBuilder
-import dev.kord.rest.builder.interaction.InteractionApplicationCommandCallbackDataBuilder
-import dev.kord.rest.json.request.FollowupMessageCreateRequest
-import dev.kord.rest.json.request.InteractionResponseCreateRequest
-import dev.kord.rest.json.request.MultipartFollowupMessageCreateRequest
 import dev.kord.x.commands.annotation.AutoWired
 import dev.kord.x.commands.annotation.ModuleName
 import dev.kord.x.commands.kord.module.command
@@ -31,9 +21,6 @@ import kotlinx.coroutines.launch
 import org.koin.core.Koin
 import today.howoldisjava8.discordbot.command.AbstractSlashCommand
 import today.howoldisjava8.discordbot.core.formatMessage
-import kotlin.contracts.ExperimentalContracts
-import kotlin.contracts.InvocationKind
-import kotlin.contracts.contract
 
 @AutoWired
 @ModuleName("General")
@@ -104,4 +91,3 @@ object TellMeSlashCommand : AbstractSlashCommand() {
     }
   }
 }
-
