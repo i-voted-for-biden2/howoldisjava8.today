@@ -4,11 +4,13 @@ on:
   push:
     paths-ignore:
       - discord-bot/**
-        - android/**
+      - twitter-bot/**
+      - android/**
   pull_request:
     paths-ignore:
       - discord-bot/**
-        - android/**
+      - twitter-bot/**
+      - android/**
 
 jobs:
   ci:
