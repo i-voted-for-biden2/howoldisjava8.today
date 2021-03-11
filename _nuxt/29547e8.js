@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[3],{263:function(n,o,e){"use strict";e.r(o);e(10);o.default=function(n){return new Promise((function(n){n({java_is_old:"Java 8 is {specifier} old today.",loading:"very",and:"and",time:{years:"one year | {n} years",months:"one month | {n} months",days:"one day | {n} days"}})}))}}}]);
