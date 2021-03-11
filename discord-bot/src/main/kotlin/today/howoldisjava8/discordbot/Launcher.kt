@@ -11,6 +11,7 @@ import dev.kord.x.lavalink.kord.lavakord
 import kapt.kotlin.generated.configure
 import org.koin.dsl.module
 import today.howoldisjava8.discordbot.commands.HowOldIsJava8SlashCommand
+import today.howoldisjava8.discordbot.commands.TellMeSlashCommand
 
 suspend fun main() {
   bot(System.getenv("TOKEN")) {
@@ -46,6 +47,7 @@ suspend fun main() {
       }
     }
 
-    HowOldIsJava8SlashCommand.register(kord) // See commands/HowOldIsJava8.kt
+    HowOldIsJava8SlashCommand.register(getKoin()) // See commands/HowOldIsJava8.kt
+    TellMeSlashCommand.register(getKoin()) // See commands/TellMeCommand.kt
   }
 }

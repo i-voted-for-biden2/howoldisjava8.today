@@ -1,0 +1,73 @@
+package today.howoldisjava8.discordbot.command
+
+import dev.kord.common.annotation.KordPreview
+import dev.kord.core.Kord
+import dev.kord.core.event.interaction.InteractionCreateEvent
+import dev.kord.rest.builder.interaction.ApplicationCommandCreateBuilder
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
+import org.koin.core.Koin
+
+/**
+ * Abstraction for slash commands.
+ *
+ * @property name the name of the slash command
+ * @property description the description of the slash command
+ */
+@KordPreview
+abstract class AbstractSlashCommand {
+  abstract val name: String
+  abstract val description: String
+
+  /**
+   * The projects [Koin] instance.
+   */
+  protected lateinit var koin: Koin
+    private set
+
+  /**
+   * Registers the slash command to the project.
+   *
+   * @throws IllegalStateException if it already got registeres
+   */
+  open suspend fun register(koin: Koin) {
+    require(!this::koin.isInitialized) { "Command already registered" }
+    this.koin = koin
+    val kord = koin.get<Kord>()
+    registerCommand(kord)
+    registerListener(kord)
+  }
+
+  private fun registerListener(kord: Kord) {
+    kord
+      .events
+      .buffer(Channel.UNLIMITED)
+      .filterIsInstance<InteractionCreateEvent>()
+      .filter { it.interaction.command.rootName == name }
+      .onEach {
+        kord.launch {
+          it.onInvocation()
+        }
+      }.launchIn(kord)
+  }
+
+  /**
+   * This gets invoked on any [InteractionCreateEvent] that matches [name].
+   */
+  protected abstract suspend fun InteractionCreateEvent.onInvocation()
+
+  // Global commands have a 2 hour update time so for testing you may want to use guild commands
+  // as they update instantly
+  // You can only create guild commands or use global commands if the bot is added with the application.commands scope
+  // In addition to the bot scope
+  // Global commands work on any DM Channel and on any guild the bot has the scope on
+  @OptIn(KordPreview::class)
+  private suspend fun registerCommand(kord: Kord) =
+    kord.slashCommands.createGlobalApplicationCommand(name, description) { commandOptions() }
+
+  /**
+   * This can be overridden to apply on options to the command.
+   */
+  open suspend fun ApplicationCommandCreateBuilder.commandOptions() = Unit
+}
