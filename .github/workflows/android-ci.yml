@@ -1,9 +1,8 @@
 name: Android App CD
 on:
   push:
-    paths:
-      - android/**
-  pull_request:
+    branches:
+      - main
     paths:
       - android/**
 
