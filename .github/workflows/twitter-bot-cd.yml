@@ -1,0 +1,34 @@
+name: Twitter bot Docker image
+
+on:
+  push:
+    paths:
+      - twitter-bot/**
+    branches:
+      - main
+
+jobs:
+  release:
+    name: Publish Docker image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Login
+        env:
+          GITHUB_TOKEN: ${{ secrets.WHATEVER }}
+        run: echo "$GITHUB_TOKEN" | docker login ghcr.io --username phanatic --password-stdin
+      - name: Build & Tag
+        run: docker build -t ghcr.io/i-voted-for-biden2/howoldisjava8.today/twitter-bot:latest -t ghcr.io/i-voted-for-biden2/howoldisjava8.today/twitter-bot:"$GITHUB_SHA" -t registry.heroku.com/how-old-is-java-8-twitter/worker:latest twitter-bot
+      - name: Push
+        run: docker push ghcr.io/i-voted-for-biden2/howoldisjava8.today/twitter-bot:latest
+      - name: Push specific tag
+        run: docker push ghcr.io/i-voted-for-biden2/howoldisjava8.today/twitter-bot:"$GITHUB_SHA"
+      - name: Login to Heroku registry
+        env:
+          HEROKU_EMAIL: ${{ secrets.HEROKU_TWITTER_EMAIL }}
+          HERUKU_KEY: ${{ secrets.HEROKU_TWITTER_API_KEY }}
+        run: echo "$HERUKU_KEY" | docker login --username="$HEROKU_EMAIL" registry.heroku.com --password-stdin
+      - name: Deploy to Heroku
+        run: docker push registry.heroku.com/how-old-is-java-8-twitter/worker:latest

@@ -20,11 +20,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.WHATEVER }}
         run: echo "$GITHUB_TOKEN" | docker login ghcr.io --username phanatic --password-stdin
       - name: Build & Tag
-        run: docker build -t ghcr.io/drschlaubi/java8isancient/bot:latest -t ghcr.io/drschlaubi/java8isancient/bot:"$GITHUB_SHA" -t registry.heroku.com/desolate-earth-51306/worker:latest discord-bot
+        run: docker build -t ghcr.io/i-voted-for-biden2/howoldisjava8.today/bot:latest -t ghcr.io/i-voted-for-biden2/howoldisjava8.today/bot:"$GITHUB_SHA" -t registry.heroku.com/desolate-earth-51306/worker:latest discord-bot
       - name: Push
-        run: docker push ghcr.io/drschlaubi/java8isancient/bot:latest
+        run: docker push ghcr.io/i-voted-for-biden2/howoldisjava8.today/bot:latest
       - name: Push specific tag
-        run: docker push ghcr.io/drschlaubi/java8isancient/bot:"$GITHUB_SHA"
+        run: docker push ghcr.io/i-voted-for-biden2/howoldisjava8.today/bot:"$GITHUB_SHA"
       - name: Login to Heroku registry
         env:
           HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
