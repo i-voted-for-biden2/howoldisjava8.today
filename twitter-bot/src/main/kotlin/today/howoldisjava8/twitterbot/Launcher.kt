@@ -62,7 +62,7 @@ suspend fun main() {
     }
   }
 
-  twitter.addFilteredStreamRule("""(java old 8) OR ( @HowOldIsJava8 )""", "java")
+  twitter.addFilteredStreamRule("(java old 8)", "java")
 
   println("Starting Tweet Stream")
   twitter.startFilteredStream {
