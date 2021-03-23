@@ -19,7 +19,7 @@ jobs:
       - name: Assemble Release Bundle
         run: cd android && ./gradlew bundleRelease
       - name: Sign Release
-        uses: r0adkll/sign-android-release@v1
+        uses: r0adkll/sign-android-release@v1.0.4
         with:
           releaseDirectory: android/app/build/outputs/bundle/release
           signingKeyBase64: ${{ secrets.SIGNING_KEY }}
