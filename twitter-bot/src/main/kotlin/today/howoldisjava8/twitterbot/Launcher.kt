@@ -18,12 +18,14 @@ import kotlinx.serialization.json.putJsonObject
 import today.howoldisjava8.twitterbot.config.Config
 import today.howoldisjava8.twitterbot.core.formatMessage
 import today.howoldisjava8.twitterbot.twitter.credentials
+import java.util.*
 import java.util.concurrent.ForkJoinPool
 import java.util.concurrent.Future
 import kotlin.coroutines.resumeWithException
 
 @Suppress("BlockingMethodInNonBlockingContext")
 suspend fun main() {
+  TimeZone.setDefault(TimeZone.getTimeZone("Europe/Berlin"))
   val twitter = TwitterClient(credentials {
     apiKey = Config.TWITTER_API_KEY
     apiSecretKey = Config.TWITTER_API_SECRET
@@ -62,7 +64,7 @@ suspend fun main() {
     }
   }
 
-  twitter.addFilteredStreamRule("(java old 8)", "java")
+  twitter.addFilteredStreamRule("(how java old 8)", "java")
 
   println("Starting Tweet Stream")
   twitter.startFilteredStream {
