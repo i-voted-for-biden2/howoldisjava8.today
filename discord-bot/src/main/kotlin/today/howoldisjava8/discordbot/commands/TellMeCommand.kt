@@ -9,11 +9,11 @@ import dev.kord.x.commands.annotation.AutoWired
 import dev.kord.x.commands.annotation.ModuleName
 import dev.kord.x.commands.kord.module.command
 import dev.kord.x.commands.model.command.invoke
-import dev.kord.x.lavalink.LavaKord
-import dev.kord.x.lavalink.audio.TrackEndEvent
-import dev.kord.x.lavalink.kord.connectAudio
-import dev.kord.x.lavalink.kord.getLink
-import dev.kord.x.lavalink.rest.loadItem
+import dev.schlaubi.lavakord.LavaKord
+import dev.schlaubi.lavakord.audio.TrackEndEvent
+import dev.schlaubi.lavakord.kord.connectAudio
+import dev.schlaubi.lavakord.kord.getLink
+import dev.schlaubi.lavakord.rest.loadItem
 import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.flow.take
@@ -76,7 +76,6 @@ object TellMeSlashCommand : AbstractSlashCommand() {
 
   override suspend fun InteractionCreateEvent.onInvocation() {
     with(interaction) {
-      if (command.rootName == "tellme") {
         val ack = acknowledge()
 
         if (this !is GuildInteraction) {
@@ -89,5 +88,4 @@ object TellMeSlashCommand : AbstractSlashCommand() {
         }
       }
     }
-  }
 }
