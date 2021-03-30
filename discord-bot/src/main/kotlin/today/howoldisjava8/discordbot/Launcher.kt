@@ -7,7 +7,7 @@ import dev.kord.x.commands.kord.model.prefix.kord
 import dev.kord.x.commands.kord.model.prefix.mention
 import dev.kord.x.commands.model.prefix.literal
 import dev.kord.x.commands.model.prefix.or
-import dev.kord.x.lavalink.kord.lavakord
+import dev.schlaubi.lavakord.kord.lavakord
 import kapt.kotlin.generated.configure
 import org.koin.dsl.module
 import today.howoldisjava8.discordbot.commands.HowOldIsJava8SlashCommand
