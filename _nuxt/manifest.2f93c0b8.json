@@ -56,5 +56,33 @@
     "de",
     "fr",
     "es"
-  ]
+  ],
+  "orientation": "portrait-primary",
+  "screenshots": [
+    {
+      "src": "screenshots/light_phone.png",
+      "sizes": "256x512",
+      "type": "image/png"
+    },
+    {
+      "src": "screenshots/dark_phone.png",
+      "sizes": "256x512",
+      "type": "image/png"
+    },
+    {
+      "src": "screenshots/light_tablet.png",
+      "sizes": "384x512",
+      "type": "image/png"
+    },
+    {
+      "src": "screenshots/dark_tablet.png",
+      "sizes": "384x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": [
+    "education",
+    "utilities"
+  ],
+  "shortcuts": []
 }
