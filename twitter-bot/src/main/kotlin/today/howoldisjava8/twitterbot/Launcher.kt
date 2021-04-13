@@ -58,7 +58,7 @@ suspend fun main() {
   }
 
   GlobalScope.launch {
-    doWhile("0 10 * * *") {
+    doWhile("0 0 10 * * *") {
       twitter.postTweet(formatMessage())
       true
     }
