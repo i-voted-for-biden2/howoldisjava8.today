@@ -43,7 +43,7 @@ suspend fun main() {
     // We need to wait for a connection before we can do this
     kord.on<ReadyEvent> {
       kord.editPresence {
-        playing("With Java 8's big brother (Java 15)")
+        playing("With Java 8's big brother (Java 16)")
       }
     }
 
