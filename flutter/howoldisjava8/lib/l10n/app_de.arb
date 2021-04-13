@@ -1,0 +1,42 @@
+{
+  "@@locale": "de",
+  "@@last_modified": "2021-04-13T17:58:24.326774",
+  "age": "Java 8 ist heute {specifier} alt.",
+  "@age": {
+    "type": "text",
+    "placeholders": {
+      "specifier": {}
+    }
+  },
+  "loading": "sehr",
+  "@loading": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "and": "und",
+  "@and": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "timeYear": "{years,plural, =1{ein Jahr}other{{years} Jahre}}",
+  "@timeYear": {
+    "type": "text",
+    "placeholders": {
+      "years": {}
+    }
+  },
+  "timeMonths": "{months,plural, =1{einen Monat}other{{months} Monate}}",
+  "@timeMonths": {
+    "type": "text",
+    "placeholders": {
+      "months": {}
+    }
+  },
+  "timeDays": "{days,plural, =1{einen Tag}other{{days} Tage}}",
+  "@timeDays": {
+    "type": "text",
+    "placeholders": {
+      "days": {}
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "@@locale": "fr",
+  "@@last_modified": "2021-04-13T17:58:24.326774",
+  "age": "Java 8 a {specifier} aujourd'hui.",
+  "@age": {
+    "type": "text",
+    "placeholders": {
+      "specifier": {}
+    }
+  },
+  "loading": "beaucoup",
+  "@loading": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "and": "et",
+  "@and": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "timeYear": "{years,plural, =1{un an}other{{years} ans}}",
+  "@timeYear": {
+    "type": "text",
+    "placeholders": {
+      "years": {}
+    }
+  },
+  "timeMonths": "{months,plural, =1{un mois}other{{months} mois}}",
+  "@timeMonths": {
+    "type": "text",
+    "placeholders": {
+      "months": {}
+    }
+  },
+  "timeDays": "{days,plural, =1{un mois}other{{days} jours}}",
+  "@timeDays": {
+    "type": "text",
+    "placeholders": {
+      "days": {}
+    }
+  }
+}
