@@ -10,11 +10,12 @@ repositories {
 }
 
 dependencies {
-  implementation("io.ktor", "ktor-server-core", "1.5.3")
-  implementation("io.ktor", "ktor-server-netty", "1.5.3")
-  implementation("io.ktor", "ktor-serialization", "1.5.3")
-  implementation("io.ktor", "ktor-locations", "1.5.3")
-  testImplementation("io.ktor", "ktor-server-test-host", "1.5.3")
+  implementation(platform("io.ktor:ktor-bom:1.5.3")
+  implementation("io.ktor", "ktor-server-core")
+  implementation("io.ktor", "ktor-server-netty")
+  implementation("io.ktor", "ktor-serialization")
+  implementation("io.ktor", "ktor-locations")
+  testImplementation("io.ktor", "ktor-server-test-host")
 
   implementation("io.insert-koin", "koin-ktor", "3.0.1-beta-2")
   implementation("io.insert-koin", "koin-logger-slf4j", "3.0.1-beta-2")
