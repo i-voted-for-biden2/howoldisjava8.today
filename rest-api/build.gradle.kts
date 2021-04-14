@@ -1,6 +1,7 @@
 plugins {
   kotlin("jvm") version "1.4.32"
   kotlin("plugin.serialization") version "1.4.32"
+  application
 }
 
 repositories {
@@ -42,4 +43,8 @@ tasks {
   test {
     useJUnitPlatform()
   }
+}
+
+application {
+  mainClass.set("today.howoldisjava8.api.LauncherKt")
 }
