@@ -29,4 +29,4 @@ jobs:
             ~/rest-api/build
             ~/rest-api/.gradle
       - name: Build with Gradle
-        run: cd rest-api && ./gradlew check
+        run: cd rest-api && chmod +x ./gradlew && ./gradlew check
