@@ -8,7 +8,7 @@ URL: `/v1/`
 
 | Parameter | Default Value | Optional | Possible Values |
 | --------- | ------------- | -------- | --------------- |
-| format    | message       | ✅       | message, format |
+| format    | message       | ✅       | message, period |
 
 #### Examples:
 `/v1/?format=message`
