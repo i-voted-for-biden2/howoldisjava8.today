@@ -8,25 +8,27 @@ import io.ktor.response.*
 import io.ktor.routing.*
 import org.koin.ktor.ext.inject
 import today.howoldisjava8.api.core.AgeService
-import today.howoldisjava8.api.core.InvalidApiFormatException
+import today.howoldisjava8.api.v1.Format.MESSAGE
+import today.howoldisjava8.api.v1.Format.PERIOD
 
 @Location("/")
-data class RootRoute(val format: String = "message")
+data class RootRoute(val format: Format = MESSAGE)
+
+enum class Format {
+  MESSAGE,
+  PERIOD
+}
 
 @OptIn(KtorExperimentalLocationsAPI::class)
 fun Route.apiV1() = route("v1") {
   val ageService: AgeService by inject()
   get<RootRoute> {
-    if (it.format !in arrayOf("message", "period")) {
-      throw InvalidApiFormatException(it.format)
-    }
-
     when (it.format) {
-      "message" -> {
+      MESSAGE -> {
         val message = ageService.getAsMessage()
         call.respond(mapOf("message" to message))
       }
-      "period" -> {
+      PERIOD -> {
         val period = ageService.getAsPeriod()
         call.respond(period)
       }

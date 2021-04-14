@@ -19,6 +19,7 @@ import org.koin.logger.SLF4JLogger
 import today.howoldisjava8.api.core.AgeService
 import today.howoldisjava8.api.core.AgeServiceImpl
 import today.howoldisjava8.api.core.InvalidApiFormatException
+import today.howoldisjava8.api.v1.Format
 import today.howoldisjava8.api.v1.apiV1
 import kotlin.time.ExperimentalTime
 import kotlin.time.minutes
@@ -51,6 +52,12 @@ fun Application.module(testing: Boolean = false) {
   install(Koin) {
     SLF4JLogger()
     modules(apiModule)
+  }
+  install(DataConversion) {
+    convert(Format::class) {
+      encode { if (it == null) emptyList() else listOf((it as Format).name.toLowerCase()) }
+      decode { values, type -> Format.values().first { it.name.toLowerCase() in values } }
+    }
   }
   install(StatusPages) {
     exception<InvalidApiFormatException> {
