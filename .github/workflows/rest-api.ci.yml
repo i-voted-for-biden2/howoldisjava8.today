@@ -1,0 +1,32 @@
+name: Rest API CI
+
+on:
+  push:
+    paths:
+      - rest-api/**
+  pull_request:
+    paths:
+      - rest-api/**
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Cache Gradle packages
+        uses: actions/cache@v2
+        with:
+          key: "$GITHUB_SHA"
+          path: |
+            ~/rest-api/builds
+            ~/rest-api/build
+            ~/rest-api/.gradle
+      - name: Build with Gradle
+        run: cd rest-api && ./gradlew compileKotlin
