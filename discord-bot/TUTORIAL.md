@@ -25,7 +25,7 @@ fun howOldIsJava8() = command("howoldisjava8") {
   }
 }
 ```
-You can find the full example [here](https://github.com/DRSchlaubi/java8isancient/blob/main/discord-bot/src/main/kotlin/today/howoldisjava8/discord_bot/commands/HowOldIsJava8.kt#L16-L34)
+You can find the full example [here](https://github.com/i-voted-for-biden2/howoldisjava8.today/blob/main/discord-bot/src/main/kotlin/today/howoldisjava8/discordbot/commands/HowOldIsJava8.kt#L36-L68)
 
 # Slash Commands
 
