@@ -6,19 +6,19 @@ plugins {
 
 repositories {
   mavenCentral()
-  jcenter()
 }
 
 dependencies {
   implementation("io.github.cdimascio", "dotenv-kotlin", "6.2.2")
-  implementation("io.ktor", "ktor-client-okhttp", "1.5.2")
-  implementation("io.ktor", "ktor-client-serialization", "1.5.2")
-  implementation("com.github.redouane59.twitter", "twittered", "1.20")
-  implementation("org.jetbrains.kotlinx", "kotlinx-datetime", "0.1.1")
+  implementation(platform("io.ktor:ktor-bom:1.6.1"))
+  implementation("io.ktor", "ktor-client-okhttp")
+  implementation("io.ktor", "ktor-client-serialization")
+  implementation("com.github.redouane59.twitter", "twittered", "1.26")
+  implementation("org.jetbrains.kotlinx", "kotlinx-datetime", "0.2.1")
 
   implementation("org.slf4j", "slf4j-simple", "1.7.30")
 
-  implementation("dev.inmo", "krontab", "0.5.0")
+  implementation("dev.inmo", "krontab", "0.6.1")
 }
 
 tasks {

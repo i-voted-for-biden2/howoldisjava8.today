@@ -2,9 +2,9 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import io.gitlab.arturbosch.detekt.Detekt
 
 plugins {
-  kotlin("jvm") version "1.4.32"
-  kotlin("kapt") version "1.4.32"
-  id("io.gitlab.arturbosch.detekt") version "1.16.0"
+  kotlin("jvm") version "1.5.20"
+  kotlin("kapt") version "1.5.20"
+  id("io.gitlab.arturbosch.detekt") version "1.17.1"
   application
 }
 
@@ -14,8 +14,6 @@ version = "1.0-SNAPSHOT"
 repositories {
   // Required for Kord and Kotlin
   mavenCentral()
-  // Currently only required for koin (Kordx.commands) dependency due to weird Gradle bug
-  jcenter()
   // Kotlinx.date-time
   maven("https://kotlin.bintray.com/kotlinx/")
   // Kord snapshots
@@ -35,7 +33,7 @@ application {
 
 dependencies {
   // See https://github.com/kordlib/kord#gradle-kotlin
-  implementation("dev.kord", "kord-core", "0.7.0-SNAPSHOT")
+  implementation("dev.kord", "kord-core", "0.7.3")
 
   // See https://github.com/DRSchlaubi/Lavalink.kt/tree/feature/mpp
   implementation("dev.schlaubi.lavakord", "kord", "1.0.0-SNAPSHOT")
@@ -44,12 +42,12 @@ dependencies {
   implementation("dev.kord.x", "commands-runtime-kord", "0.4.0-SNAPSHOT")
   kapt("dev.kord.x", "commands-processor", "0.4.0-SNAPSHOT")
 
-  implementation("org.jetbrains.kotlinx", "kotlinx-datetime", "0.1.1")
+  implementation("org.jetbrains.kotlinx", "kotlinx-datetime", "0.2.1")
 
   implementation("org.slf4j", "slf4j-simple", "1.7.30")
 
   // Add ktlint
-  detektPlugins("io.gitlab.arturbosch.detekt", "detekt-formatting", "1.15.0")
+  detektPlugins("io.gitlab.arturbosch.detekt", "detekt-formatting", "1.17.1")
 }
 
 tasks {

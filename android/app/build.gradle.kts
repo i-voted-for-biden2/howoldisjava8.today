@@ -18,7 +18,7 @@ import groovy.xml.MarkupBuilder
 
 plugins {
   id("com.android.application")
-  kotlin("android") version "1.4.31" apply false
+  kotlin("android") version "1.5.20" apply false
 }
 
 // For some reason automatic applying applied this before the android plugin
@@ -142,5 +142,5 @@ tasks {
 }
 
 dependencies {
-  implementation("com.google.androidbrowserhelper", "androidbrowserhelper", "2.2.0")
+  implementation("com.google.androidbrowserhelper", "androidbrowserhelper", "2.2.2")
 }
