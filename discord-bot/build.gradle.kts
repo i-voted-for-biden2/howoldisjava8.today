@@ -36,7 +36,7 @@ dependencies {
   implementation("dev.kord", "kord-core", "0.7.3")
 
   // See https://github.com/DRSchlaubi/Lavalink.kt/tree/feature/mpp
-  implementation("dev.schlaubi.lavakord", "kord", "1.0.0-SNAPSHOT")
+  implementation("dev.schlaubi.lavakord", "kord", "2.0.0")
 
   // See https://github.com/kordlib/kordx.commands#gradle-kotlin
   implementation("dev.kord.x", "commands-runtime-kord", "0.4.0-SNAPSHOT")
