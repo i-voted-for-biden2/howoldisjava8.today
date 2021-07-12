@@ -30,8 +30,8 @@ android {
     applicationId = TWAManifest.applicationId
     minSdkVersion(23)
     targetSdkVersion(30)
-    versionCode = 2
-    versionName = "1.0.1"
+    versionCode = 3
+    versionName = "1.0.2"
 
     // The URL that will be used when launching the TWA from the Android Launcher
     val launchUrl = "https://" + TWAManifest.hostName + TWAManifest.launchUrl
