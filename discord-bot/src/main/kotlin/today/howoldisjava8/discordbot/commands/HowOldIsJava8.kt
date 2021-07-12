@@ -1,6 +1,7 @@
 package today.howoldisjava8.discordbot.commands
 
 import dev.kord.common.annotation.KordPreview
+import dev.kord.core.entity.interaction.CommandInteraction
 import dev.kord.core.event.interaction.InteractionCreateEvent
 import dev.kord.rest.builder.interaction.ApplicationCommandCreateBuilder
 import dev.kord.x.commands.annotation.AutoWired
@@ -39,9 +40,8 @@ object HowOldIsJava8SlashCommand : AbstractSlashCommand() {
   override val description: String = "Tells you the age of Java 8"
 
   override suspend fun InteractionCreateEvent.onInvocation() {
-    with(interaction) {
-      interaction.sendNotice(command.options["use-tts"]?.value as? Boolean == true)
-    }
+    val command = (interaction as? CommandInteraction)?.command ?: return
+    interaction.sendNotice(command.options["use-tts"]?.value as? Boolean == true)
   }
 
   override suspend fun ApplicationCommandCreateBuilder.commandOptions() {
