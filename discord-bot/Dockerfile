@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk16-openj9 as builder
+FROM adoptopenjdk/openjdk15-openj9 as builder
 
 COPY . .
 
