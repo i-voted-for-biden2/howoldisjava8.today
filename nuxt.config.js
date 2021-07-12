@@ -46,7 +46,8 @@ export default {
     '@nuxt/typescript-build',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/moment',
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    '@nuxt/postcss8'
   ],
 
   modules: [
