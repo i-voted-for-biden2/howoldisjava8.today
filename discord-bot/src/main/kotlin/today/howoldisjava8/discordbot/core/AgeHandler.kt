@@ -2,10 +2,10 @@ package today.howoldisjava8.discordbot.core
 
 import dev.kord.common.annotation.KordPreview
 import dev.kord.common.entity.Permission
-import dev.kord.core.behavior.InteractionBehavior
 import dev.kord.core.behavior.channel.MessageChannelBehavior
 import dev.kord.core.behavior.channel.createMessage
-import dev.kord.core.behavior.respond
+import dev.kord.core.behavior.interaction.InteractionBehavior
+import dev.kord.core.behavior.interaction.respondPublic
 import dev.kord.core.entity.channel.TextChannel
 import dev.kord.x.commands.kord.model.context.KordCommandEvent
 import kotlinx.datetime.Clock
@@ -84,7 +84,7 @@ suspend fun MessageChannelBehavior.sendNotice(tts: Boolean) = createMessage {
 // Every slash command has to be acked within 3 seconds
 // If you want to ack before you respond you need to replace respond with followUp
 @OptIn(KordPreview::class)
-suspend fun InteractionBehavior.sendNotice(tts: Boolean) = respond {
+suspend fun InteractionBehavior.sendNotice(tts: Boolean) = respondPublic {
   this.tts = (kord.getChannel(channelId) as? TextChannel)?.safeTTS(tts) == true
   content = formatMessage()
 }
@@ -96,5 +96,5 @@ suspend fun KordCommandEvent.sendNotice(tts: Boolean) = channel.sendNotice(tts)
  */
 suspend fun MessageChannelBehavior.safeTTS(wantTTS: Boolean) = wantTTS &&
   (asChannel() as? TextChannel)?.getEffectivePermissions(kord.selfId)?.contains(
-  Permission.SendTTSMessages
-) == true
+    Permission.SendTTSMessages
+  ) == true

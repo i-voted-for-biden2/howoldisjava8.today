@@ -2,6 +2,7 @@ package today.howoldisjava8.discordbot.command
 
 import dev.kord.common.annotation.KordPreview
 import dev.kord.core.Kord
+import dev.kord.core.entity.interaction.CommandInteraction
 import dev.kord.core.event.interaction.InteractionCreateEvent
 import dev.kord.rest.builder.interaction.ApplicationCommandCreateBuilder
 import kotlinx.coroutines.channels.Channel
@@ -48,7 +49,7 @@ abstract class AbstractSlashCommand {
       .events
       .buffer(Channel.UNLIMITED)
       .filterIsInstance<InteractionCreateEvent>()
-      .filter { it.interaction.command.rootName == name }
+      .filter { (it.interaction as? CommandInteraction)?.command?.rootName == name }
       .onEach {
         kord.launch {
           it.onInvocation()
