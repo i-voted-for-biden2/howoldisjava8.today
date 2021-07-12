@@ -1,10 +1,10 @@
-FROM adoptopenjdk/openjdk16-openj9:jre as builder
+FROM adoptopenjdk/openjdk16-openj9 as builder
 
 COPY . .
 
 RUN ./gradlew --no-daemon installDist
 
-FROM adoptopenjdk/openjdk15-openj9
+FROM adoptopenjdk/openjdk16-openj9:jre
 
 WORKDIR /user/app
 
