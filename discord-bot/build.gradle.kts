@@ -2,8 +2,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import io.gitlab.arturbosch.detekt.Detekt
 
 plugins {
-  kotlin("jvm") version "1.5.20"
-  kotlin("kapt") version "1.5.20"
+  kotlin("jvm") version "1.5.21"
+  kotlin("kapt") version "1.5.21"
   id("io.gitlab.arturbosch.detekt") version "1.17.1"
   application
 }
