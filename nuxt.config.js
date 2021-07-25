@@ -42,6 +42,11 @@ export default {
 
   components: true,
 
+  build: {
+    analyze:true,
+    extractCSS: true
+  },
+  
   buildModules: [
     '@nuxt/typescript-build',
     '@nuxtjs/tailwindcss',
