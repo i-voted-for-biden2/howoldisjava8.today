@@ -3,7 +3,7 @@ import io.gitlab.arturbosch.detekt.Detekt
 
 plugins {
   kotlin("jvm") version "1.5.21"
-  kotlin("kapt") version "1.5.21"
+  kotlin("kapt") version "1.5.31"
   id("io.gitlab.arturbosch.detekt") version "1.17.1"
   application
 }
