@@ -41,7 +41,7 @@ abstract class AbstractSlashCommand {
     require(!this@AbstractSlashCommand::koin.isInitialized) { "Command already registered" }
     this@AbstractSlashCommand.koin = koin
     val kord = koin.get<Kord>()
-    registerCommand(kord)
+    registerCommand()
     registerListener(kord)
   }
 
@@ -69,7 +69,7 @@ abstract class AbstractSlashCommand {
   // In addition to the bot scope
   // Global commands work on any DM Channel and on any guild the bot has the scope on
   @OptIn(KordPreview::class)
-  private suspend fun MultiApplicationCommandBuilder.registerCommand(kord: Kord) {
+  private suspend fun MultiApplicationCommandBuilder.registerCommand() {
     input(name, description) { commandOptions() }
   }
 
