@@ -4,13 +4,14 @@ import dev.kord.common.annotation.KordPreview
 import dev.kord.core.Kord
 import dev.kord.core.entity.interaction.CommandInteraction
 import dev.kord.core.event.interaction.InteractionCreateEvent
-import dev.kord.rest.builder.interaction.ApplicationCommandCreateBuilder
+import dev.kord.rest.builder.interaction.ChatInputCreateBuilder
+import dev.kord.rest.builder.interaction.MultiApplicationCommandBuilder
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.buffer
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.filterIsInstance
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.koin.core.Koin
 
@@ -36,9 +37,9 @@ abstract class AbstractSlashCommand {
    *
    * @throws IllegalStateException if it already got registeres
    */
-  open suspend fun register(koin: Koin) {
-    require(!this::koin.isInitialized) { "Command already registered" }
-    this.koin = koin
+  open suspend fun MultiApplicationCommandBuilder.register(koin: Koin) {
+    require(!this@AbstractSlashCommand::koin.isInitialized) { "Command already registered" }
+    this@AbstractSlashCommand.koin = koin
     val kord = koin.get<Kord>()
     registerCommand(kord)
     registerListener(kord)
@@ -68,11 +69,12 @@ abstract class AbstractSlashCommand {
   // In addition to the bot scope
   // Global commands work on any DM Channel and on any guild the bot has the scope on
   @OptIn(KordPreview::class)
-  private suspend fun registerCommand(kord: Kord) =
-    kord.slashCommands.createGlobalApplicationCommand(name, description) { commandOptions() }
+  private suspend fun MultiApplicationCommandBuilder.registerCommand(kord: Kord) {
+    input(name, description) { commandOptions() }
+  }
 
   /**
    * This can be overridden to apply on options to the command.
    */
-  open suspend fun ApplicationCommandCreateBuilder.commandOptions() = Unit
+  open suspend fun ChatInputCreateBuilder.commandOptions() = Unit
 }

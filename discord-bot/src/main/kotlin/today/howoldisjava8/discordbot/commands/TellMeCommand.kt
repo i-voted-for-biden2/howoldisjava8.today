@@ -3,7 +3,7 @@ package today.howoldisjava8.discordbot.commands
 import dev.kord.common.annotation.KordPreview
 import dev.kord.core.behavior.MemberBehavior
 import dev.kord.core.behavior.interaction.followUpEphemeral
-import dev.kord.core.entity.interaction.GuildInteraction
+import dev.kord.core.entity.interaction.GuildChatInputCommandInteraction
 import dev.kord.core.event.interaction.InteractionCreateEvent
 import dev.kord.x.commands.annotation.AutoWired
 import dev.kord.x.commands.annotation.ModuleName
@@ -78,7 +78,7 @@ object TellMeSlashCommand : AbstractSlashCommand() {
     with(interaction) {
         val ack = acknowledgeEphemeral()
 
-        if (this !is GuildInteraction) {
+        if (this !is GuildChatInputCommandInteraction) {
           ack.followUpEphemeral { content = "DMs aren't supported!" }
           return@with
         }

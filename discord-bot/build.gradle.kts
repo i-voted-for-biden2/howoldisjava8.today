@@ -2,9 +2,9 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import io.gitlab.arturbosch.detekt.Detekt
 
 plugins {
-  kotlin("jvm") version "1.5.21"
-  kotlin("kapt") version "1.5.21"
-  id("io.gitlab.arturbosch.detekt") version "1.17.1"
+  kotlin("jvm") version "1.5.31"
+  kotlin("kapt") version "1.5.31"
+  id("io.gitlab.arturbosch.detekt") version "1.18.1"
   application
 }
 
@@ -14,8 +14,6 @@ version = "1.0-SNAPSHOT"
 repositories {
   // Required for Kord and Kotlin
   mavenCentral()
-  // Kotlinx.date-time
-  maven("https://kotlin.bintray.com/kotlinx/")
   // Kord snapshots
   maven("https://oss.sonatype.org/content/repositories/snapshots")
   // Lavalink.kt / Lavakord
@@ -33,10 +31,10 @@ application {
 
 dependencies {
   // See https://github.com/kordlib/kord#gradle-kotlin
-  implementation("dev.kord", "kord-core", "0.7.3")
+  implementation("dev.kord", "kord-core", "0.8.0-M5")
 
   // See https://github.com/DRSchlaubi/Lavalink.kt/tree/feature/mpp
-  implementation("dev.schlaubi.lavakord", "kord", "2.0.0")
+  implementation("dev.schlaubi.lavakord", "kord", "2.0.2")
 
   // See https://github.com/kordlib/kordx.commands#gradle-kotlin
   implementation("dev.kord.x", "commands-runtime-kord", "0.4.0-SNAPSHOT")
@@ -47,7 +45,7 @@ dependencies {
   implementation("org.slf4j", "slf4j-simple", "1.7.30")
 
   // Add ktlint
-  detektPlugins("io.gitlab.arturbosch.detekt", "detekt-formatting", "1.17.1")
+  detektPlugins("io.gitlab.arturbosch.detekt", "detekt-formatting", "1.18.1")
 }
 
 tasks {
@@ -60,6 +58,6 @@ tasks {
 
   withType<Detekt> {
     // Target version of the generated JVM bytecode. It is used for type resolution.
-    this.jvmTarget = "1.8"
+    this.jvmTarget = "16"
   }
 }

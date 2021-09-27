@@ -43,11 +43,17 @@ suspend fun main() {
     // We need to wait for a connection before we can do this
     kord.on<ReadyEvent> {
       kord.editPresence {
-        playing("With Java 8's big brother (Java 16)")
+        playing("With Java 8's big brother (Java 17)")
       }
     }
 
-    HowOldIsJava8SlashCommand.register(getKoin()) // See commands/HowOldIsJava8.kt
-    TellMeSlashCommand.register(getKoin()) // See commands/TellMeCommand.kt
+    kord.createGlobalApplicationCommands {
+      with(HowOldIsJava8SlashCommand) {
+        register(getKoin()) // See commands/HowOldIsJava8.kt
+      }
+      with(TellMeSlashCommand) {
+        register(getKoin()) // See commands/TellMeCommand.kt
+      }
+    }
   }
 }

@@ -4,6 +4,8 @@ import dev.kord.common.annotation.KordPreview
 import dev.kord.core.entity.interaction.CommandInteraction
 import dev.kord.core.event.interaction.InteractionCreateEvent
 import dev.kord.rest.builder.interaction.ApplicationCommandCreateBuilder
+import dev.kord.rest.builder.interaction.ChatInputCreateBuilder
+import dev.kord.rest.builder.interaction.boolean
 import dev.kord.x.commands.annotation.AutoWired
 import dev.kord.x.commands.annotation.ModuleName
 import dev.kord.x.commands.argument.extension.named
@@ -44,7 +46,7 @@ object HowOldIsJava8SlashCommand : AbstractSlashCommand() {
     interaction.sendNotice(command.options["use-tts"]?.value as? Boolean == true)
   }
 
-  override suspend fun ApplicationCommandCreateBuilder.commandOptions() {
+  override suspend fun ChatInputCreateBuilder.commandOptions() {
     boolean("use-tts", "Read the message using TTS") {
       default = false
     }

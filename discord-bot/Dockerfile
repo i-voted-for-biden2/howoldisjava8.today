@@ -1,10 +1,10 @@
-FROM adoptopenjdk/openjdk15-openj9 as builder
+FROM adoptopenjdk/openjdk16:alpine-jre as builder
 
 COPY . .
 
 RUN ./gradlew --no-daemon installDist
 
-FROM adoptopenjdk/openjdk16-openj9:jre
+FROM adoptopenjdk/openjdk16:alpine-jre
 
 WORKDIR /user/app
 
