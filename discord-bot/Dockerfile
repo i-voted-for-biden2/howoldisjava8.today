@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk16:alpine-jre as builder
+FROM adoptopenjdk/openjdk16:alpine as builder
 
 COPY . .
 
