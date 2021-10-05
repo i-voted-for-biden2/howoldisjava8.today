@@ -31,7 +31,7 @@
     "@nuxtjs/moment": "^1.6.1",
     "@nuxtjs/tailwindcss": "^4.2.1",
     "@tailwindcss/postcss7-compat": "^2.2.16",
-    "autoprefixer": "10.3.6",
+    "autoprefixer": "10.3.7",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.32.0",
     "eslint-plugin-nuxt": "^2.0.0",
