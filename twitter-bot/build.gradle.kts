@@ -10,7 +10,7 @@ repositories {
 
 dependencies {
   implementation("io.github.cdimascio", "dotenv-kotlin", "6.2.2")
-  implementation(platform("io.ktor:ktor-bom:1.6.6"))
+  implementation(platform("io.ktor:ktor-bom:1.6.7"))
   implementation("io.ktor", "ktor-client-okhttp")
   implementation("io.ktor", "ktor-client-serialization")
   implementation("com.github.redouane59.twitter", "twittered", "1.26")
