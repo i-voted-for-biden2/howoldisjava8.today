@@ -17,16 +17,20 @@ fun formatMessage(): String {
     val period = java8ReleaseInstant.periodUntil(now, TimeZone.UTC)
 
     return buildString {
+        val years = period.years
+        val months = period.months
+        val days = period.days
+
+        if (months == 0 && days == 0) {
+            append("Happy new year of Java 8 🎉. ")
+        }
+
         append("Java 8 is")
         append(' ')
 
-        val years = period.years
         if (years > 0) {
             addPluralization("one year", "years", years)
         }
-
-        val months = period.months
-        val days = period.days
         if (months > 0) {
             addSeparator(days <= 0)
             addPluralization("one month", "months", months)
