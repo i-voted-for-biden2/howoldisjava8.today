@@ -23,6 +23,8 @@ suspend fun main() {
         accessTokenSecret = Config.TWITTER_ACCESS_SECRET
     })
 
+    val self = twitter.getUserFromUserId(twitter.userIdFromAccessToken)
+    logger.info("Logged in as @${self.name} (${self.id})")
     val rules: List<StreamRules.StreamRule>? = twitter.retrieveFilteredStreamRules()
     logger.info("Found ${rules?.count() ?: 0} rules!")
 
