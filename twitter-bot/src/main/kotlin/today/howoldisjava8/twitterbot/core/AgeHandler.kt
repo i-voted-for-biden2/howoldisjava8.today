@@ -13,32 +13,32 @@ val java8ReleaseInstant = Instant.fromEpochMilliseconds(JAVA_8_RELEASE)
  * Formats a message telling you how old Java 8 is.
  */
 fun formatMessage(): String {
-  val now = Clock.System.now()
-  val period = java8ReleaseInstant.periodUntil(now, TimeZone.UTC)
+    val now = Clock.System.now()
+    val period = java8ReleaseInstant.periodUntil(now, TimeZone.UTC)
 
-  return buildString {
-    append("Java 8 is")
-    append(' ')
+    return buildString {
+        append("Java 8 is")
+        append(' ')
 
-    val years = period.years
-    if (years > 0) {
-      addPluralization("one year", "years", years)
+        val years = period.years
+        if (years > 0) {
+            addPluralization("one year", "years", years)
+        }
+
+        val months = period.months
+        val days = period.days
+        if (months > 0) {
+            addSeparator(days <= 0)
+            addPluralization("one month", "months", months)
+        }
+        if (days > 0) {
+            addSeparator(true)
+            addPluralization("one day", "days", days)
+        }
+
+        append(' ')
+        append("old today")
     }
-
-    val months = period.months
-    val days = period.days
-    if (months > 0) {
-      addSeparator(days <= 0)
-      addPluralization("one month", "months", months)
-    }
-    if (days > 0) {
-      addSeparator(true)
-      addPluralization("one day", "days", days)
-    }
-
-    append(' ')
-    append("old today")
-  }
 }
 
 /**
@@ -47,9 +47,9 @@ fun formatMessage(): String {
  * If [count] is > 1 it appends "[count] [plural]"
  */
 private fun StringBuilder.addPluralization(singular: String, plural: String, count: Int) = if (count > 1) {
-  append(count)
-  append(' ')
-  append(plural)
+    append(count)
+    append(' ')
+    append(plural)
 } else append(singular)
 
 /**
@@ -57,12 +57,12 @@ private fun StringBuilder.addPluralization(singular: String, plural: String, cou
  * @param probablyLast whether to append " and " or ", "
  */
 private fun StringBuilder.addSeparator(probablyLast: Boolean = false) {
-  if (probablyLast) {
-    append(' ')
-    append("and")
-    append(' ')
-  } else {
-    append(',')
-    append(' ')
-  }
+    if (probablyLast) {
+        append(' ')
+        append("and")
+        append(' ')
+    } else {
+        append(',')
+        append(' ')
+    }
 }

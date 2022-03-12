@@ -10,7 +10,10 @@ import io.ktor.client.features.json.serializer.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.serialization.json.add
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.putJsonArray
@@ -25,73 +28,73 @@ import kotlin.coroutines.resumeWithException
 
 @Suppress("BlockingMethodInNonBlockingContext")
 suspend fun main() {
-  TimeZone.setDefault(TimeZone.getTimeZone("Europe/Berlin"))
-  val twitter = TwitterClient(credentials {
-    apiKey = Config.TWITTER_API_KEY
-    apiSecretKey = Config.TWITTER_API_SECRET
-    accessToken = Config.TWITTER_ACCESS_TOKEN
-    accessTokenSecret = Config.TWITTER_ACCESS_SECRET
-  })
+    TimeZone.setDefault(TimeZone.getTimeZone("Europe/Berlin"))
+    val twitter = TwitterClient(credentials {
+        apiKey = Config.TWITTER_API_KEY
+        apiSecretKey = Config.TWITTER_API_SECRET
+        accessToken = Config.TWITTER_ACCESS_TOKEN
+        accessTokenSecret = Config.TWITTER_ACCESS_SECRET
+    })
 
-  val rules: List<StreamRules.StreamRule>? = twitter.retrieveFilteredStreamRules()
-  println("Found ${rules?.count() ?: 0} rules!")
+    val rules: List<StreamRules.StreamRule>? = twitter.retrieveFilteredStreamRules()
+    println("Found ${rules?.count() ?: 0} rules!")
 
-  val client = HttpClient(OkHttp) {
-    install(JsonFeature) {
-      serializer = KotlinxSerializer()
-    }
-  }
-
-  if (rules?.any { it.tag == "java" } == true) {
-
-    client.post<HttpResponse>("https://api.twitter.com/2/tweets/search/stream/rules") {
-      header(HttpHeaders.Authorization, "Bearer ${Config.TWITTER_BEARER_TOKEN}")
-      header(HttpHeaders.ContentType, ContentType.Application.Json)
-      body = buildJsonObject {
-        putJsonObject("delete") {
-          putJsonArray("ids") {
-            rules.forEach { add(it.id) }
-          }
+    val client = HttpClient(OkHttp) {
+        install(JsonFeature) {
+            serializer = KotlinxSerializer()
         }
-      }
     }
-  }
 
-  GlobalScope.launch {
-    doWhile("0 0 10 * * *") {
-      twitter.postTweet(formatMessage())
-      true
+    if (rules?.any { it.tag == "java" } == true) {
+
+        client.post<HttpResponse>("https://api.twitter.com/2/tweets/search/stream/rules") {
+            header(HttpHeaders.Authorization, "Bearer ${Config.TWITTER_BEARER_TOKEN}")
+            header(HttpHeaders.ContentType, ContentType.Application.Json)
+            body = buildJsonObject {
+                putJsonObject("delete") {
+                    putJsonArray("ids") {
+                        rules.forEach { add(it.id) }
+                    }
+                }
+            }
+        }
     }
-  }
 
-  twitter.addFilteredStreamRule("(how java old 8)", "java")
-
-  println("Starting Tweet Stream")
-  twitter.startFilteredStream {
     GlobalScope.launch {
-      val user = twitter.getUserFromUserId(it.authorId).name
-      if (user == "HowOldIsJava8")
-        return@launch
-      println("${it.text} by $user")
-      twitter.postTweet("@$user, ${formatMessage()}", it.id)
+        doWhile("0 0 10 * * *") {
+            twitter.postTweet(formatMessage())
+            true
+        }
     }
-  }.await()
+
+    twitter.addFilteredStreamRule("(how java old 8)", "java")
+
+    println("Starting Tweet Stream")
+    twitter.startFilteredStream {
+        GlobalScope.launch {
+            val user = twitter.getUserFromUserId(it.authorId).name
+            if (user == "HowOldIsJava8")
+                return@launch
+            println("${it.text} by $user")
+            twitter.postTweet("@$user, ${formatMessage()}", it.id)
+        }
+    }.await()
 }
 
 @OptIn(ExperimentalCoroutinesApi::class)
 private suspend fun <T> Future<T>.await(): T = suspendCancellableCoroutine { cont ->
-  ForkJoinPool.managedBlock(object : ForkJoinPool.ManagedBlocker {
-    override fun block(): Boolean {
-      try {
-        cont.resume(get()) { cont.cancel(it) }
-      } catch (e: Throwable) {
-        cont.resumeWithException(e)
-        return false
-      }
+    ForkJoinPool.managedBlock(object : ForkJoinPool.ManagedBlocker {
+        override fun block(): Boolean {
+            try {
+                cont.resume(get()) { cont.cancel(it) }
+            } catch (e: Throwable) {
+                cont.resumeWithException(e)
+                return false
+            }
 
-      return true
-    }
+            return true
+        }
 
-    override fun isReleasable(): Boolean = isDone
-  })
+        override fun isReleasable(): Boolean = isDone
+    })
 }
