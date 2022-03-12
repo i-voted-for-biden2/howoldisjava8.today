@@ -49,10 +49,12 @@ suspend fun main() {
 
     logger.info("Starting Tweet Stream")
     twitter.startFilteredStream {
-        val user = twitter.getUserFromUserId(it.authorId).name
-        if (user == twitter.userIdFromAccessToken)
+        if (self.id == it.authorId)
             return@startFilteredStream
-        logger.info("${it.text} by $user")
+        scope.launch {
+            val user = twitter.getUserFromUserId(it.authorId)
+            logger.info("${it.text} - https://twitter.com/${user.name}/status/${it.id}")
+        }
         twitter.postTweet(TweetParameters.builder()
             .reply(TweetParameters.Reply.builder()
                 .inReplyToTweetId(it.id)
