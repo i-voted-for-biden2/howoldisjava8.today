@@ -6,10 +6,10 @@ plugins {
 
 repositories {
     mavenCentral()
+    maven("https://schlaubi.jfrog.io/artifactory/envconf/")
 }
 
 dependencies {
-    implementation("io.github.cdimascio", "dotenv-kotlin", "6.2.2")
     implementation(platform("io.ktor:ktor-bom:1.6.7"))
     implementation("io.ktor", "ktor-client-okhttp")
     implementation("io.ktor", "ktor-client-serialization")
@@ -17,6 +17,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx", "kotlinx-datetime", "0.3.2")
     implementation("org.slf4j", "slf4j-simple", "1.7.36")
     implementation("dev.inmo", "krontab", "0.7.1")
+    implementation("dev.schlaubi", "envconf", "1.1")
 }
 
 tasks {
