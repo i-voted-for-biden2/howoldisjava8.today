@@ -4,32 +4,18 @@ import dev.inmo.krontab.doWhile
 import io.github.redouane59.twitter.TwitterClient
 import io.github.redouane59.twitter.dto.stream.StreamRules
 import io.github.redouane59.twitter.dto.tweet.TweetParameters
-import io.ktor.client.*
-import io.ktor.client.engine.okhttp.*
-import io.ktor.client.features.json.*
-import io.ktor.client.features.json.serializer.*
-import io.ktor.client.request.*
-import io.ktor.client.statement.*
-import io.ktor.http.*
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.suspendCancellableCoroutine
-import kotlinx.serialization.json.add
-import kotlinx.serialization.json.buildJsonObject
-import kotlinx.serialization.json.putJsonArray
-import kotlinx.serialization.json.putJsonObject
+import kotlinx.coroutines.*
+import org.slf4j.LoggerFactory
 import today.howoldisjava8.twitterbot.config.Config
 import today.howoldisjava8.twitterbot.core.formatMessage
 import today.howoldisjava8.twitterbot.twitter.credentials
-import java.util.*
 import java.util.concurrent.ForkJoinPool
 import java.util.concurrent.Future
 import kotlin.coroutines.resumeWithException
 
 @Suppress("BlockingMethodInNonBlockingContext")
 suspend fun main() {
-    TimeZone.setDefault(TimeZone.getTimeZone("Europe/Berlin"))
+    val logger = LoggerFactory.getLogger("TwitterBot")
     val twitter = TwitterClient(credentials {
         apiKey = Config.TWITTER_API_KEY
         apiSecretKey = Config.TWITTER_API_SECRET
@@ -38,30 +24,19 @@ suspend fun main() {
     })
 
     val rules: List<StreamRules.StreamRule>? = twitter.retrieveFilteredStreamRules()
-    println("Found ${rules?.count() ?: 0} rules!")
+    logger.info("Found ${rules?.count() ?: 0} rules!")
 
-    val client = HttpClient(OkHttp) {
-        install(JsonFeature) {
-            serializer = KotlinxSerializer()
-        }
-    }
+    val scope = CoroutineScope(Dispatchers.IO) + SupervisorJob()
 
     if (rules?.any { it.tag == "java" } == true) {
-
-        client.post<HttpResponse>("https://api.twitter.com/2/tweets/search/stream/rules") {
-            header(HttpHeaders.Authorization, "Bearer ${Config.TWITTER_BEARER_TOKEN}")
-            header(HttpHeaders.ContentType, ContentType.Application.Json)
-            body = buildJsonObject {
-                putJsonObject("delete") {
-                    putJsonArray("ids") {
-                        rules.forEach { add(it.id) }
-                    }
-                }
+        rules.forEach { rule ->
+            scope.launch {
+                twitter.deleteFilteredStreamRuleId(rule.id)
             }
         }
     }
 
-    GlobalScope.launch {
+    scope.launch {
         doWhile("0 0 10 * * *") {
             twitter.postTweet(formatMessage())
             true
@@ -70,19 +45,17 @@ suspend fun main() {
 
     twitter.addFilteredStreamRule("(how java old 8)", "java")
 
-    println("Starting Tweet Stream")
+    logger.info("Starting Tweet Stream")
     twitter.startFilteredStream {
-        GlobalScope.launch {
-            val user = twitter.getUserFromUserId(it.authorId).name
-            if (user == "HowOldIsJava8")
-                return@launch
-            println("${it.text} by $user")
-            twitter.postTweet(TweetParameters.builder()
-                .reply(TweetParameters.Reply.builder()
-                    .inReplyToTweetId(it.id)
-                    .build())
-                .text(formatMessage()).build())
-        }
+        val user = twitter.getUserFromUserId(it.authorId).name
+        if (user == twitter.userIdFromAccessToken)
+            return@startFilteredStream
+        logger.info("${it.text} by $user")
+        twitter.postTweet(TweetParameters.builder()
+            .reply(TweetParameters.Reply.builder()
+                .inReplyToTweetId(it.id)
+                .build())
+            .text(formatMessage()).build())
     }.await()
 }
 

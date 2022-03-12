@@ -10,9 +10,6 @@ repositories {
 }
 
 dependencies {
-    implementation(platform("io.ktor:ktor-bom:1.6.7"))
-    implementation("io.ktor", "ktor-client-okhttp")
-    implementation("io.ktor", "ktor-client-serialization")
     implementation("io.github.redouane59.twitter", "twittered", "2.16")
     implementation("org.jetbrains.kotlinx", "kotlinx-datetime", "0.3.2")
     implementation("org.slf4j", "slf4j-simple", "1.7.36")
