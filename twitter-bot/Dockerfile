@@ -1,13 +1,13 @@
-FROM adoptopenjdk/openjdk16-openj9 as builder
+FROM ibm-semeru-runtimes:open-17-jdk as builder
 
 COPY . .
 
 RUN ./gradlew --no-daemon installDist
 
-FROM adoptopenjdk/openjdk16-openj9:jre
+FROM ibm-semeru-runtimes:open-17-jre
 
-WORKDIR /user/app
+WORKDIR /usr/app
 
 COPY --from=builder build/install/twitter-bot ./
 
-ENTRYPOINT ["/user/app/bin/twitter-bot"]
+ENTRYPOINT ["/usr/app/bin/twitter-bot"]
