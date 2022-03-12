@@ -1,8 +1,9 @@
 package today.howoldisjava8.twitterbot
 
-import com.github.redouane59.twitter.TwitterClient
-import com.github.redouane59.twitter.dto.stream.StreamRules
 import dev.inmo.krontab.doWhile
+import io.github.redouane59.twitter.TwitterClient
+import io.github.redouane59.twitter.dto.stream.StreamRules
+import io.github.redouane59.twitter.dto.tweet.TweetParameters
 import io.ktor.client.*
 import io.ktor.client.engine.okhttp.*
 import io.ktor.client.features.json.*
@@ -76,7 +77,11 @@ suspend fun main() {
             if (user == "HowOldIsJava8")
                 return@launch
             println("${it.text} by $user")
-            twitter.postTweet("@$user, ${formatMessage()}", it.id)
+            twitter.postTweet(TweetParameters.builder()
+                .reply(TweetParameters.Reply.builder()
+                    .inReplyToTweetId(it.id)
+                    .build())
+                .text(formatMessage()).build())
         }
     }.await()
 }

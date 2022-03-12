@@ -13,12 +13,10 @@ dependencies {
     implementation(platform("io.ktor:ktor-bom:1.6.7"))
     implementation("io.ktor", "ktor-client-okhttp")
     implementation("io.ktor", "ktor-client-serialization")
-    implementation("com.github.redouane59.twitter", "twittered", "1.26")
-    implementation("org.jetbrains.kotlinx", "kotlinx-datetime", "0.2.1")
-
-    implementation("org.slf4j", "slf4j-simple", "1.7.30")
-
-    implementation("dev.inmo", "krontab", "0.6.1")
+    implementation("io.github.redouane59.twitter", "twittered", "2.16")
+    implementation("org.jetbrains.kotlinx", "kotlinx-datetime", "0.3.2")
+    implementation("org.slf4j", "slf4j-simple", "1.7.36")
+    implementation("dev.inmo", "krontab", "0.7.1")
 }
 
 tasks {
