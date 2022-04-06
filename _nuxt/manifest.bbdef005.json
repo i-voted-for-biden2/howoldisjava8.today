@@ -52,6 +52,7 @@
   "theme_color": "#121212",
   "lang": "en",
   "languages": [
+    "default",
     "en",
     "de",
     "fr",
