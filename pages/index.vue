@@ -28,7 +28,7 @@ import 'moment-precise-range-plugin'
 // https://www.java.com/de/download/help/release_dates.html
 const java8Release = 1395097200000
 
-function notEmpty<TValue>(value: TValue | null | undefined): value is TValue {
+function notEmpty<TValue> (value: TValue | null | undefined): value is TValue {
   return value !== null && value !== undefined
 }
 
