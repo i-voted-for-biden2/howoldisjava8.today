@@ -1,6 +1,10 @@
 export default {
   locales: [
     {
+      code: 'default',
+      file: 'en/strings.js'
+    },
+    {
       code: 'en',
       file: 'en/strings.js'
     },
@@ -17,13 +21,14 @@ export default {
       file: 'es/strings.js'
     }
   ],
-  defaultLocale: 'en',
+  defaultLocale: 'default',
   vueI18n: {
-    fallbackLocale: 'en'
+    fallbackLocale: 'default'
   },
   lazy: true,
   langDir: 'i18n/',
   detectBrowserLanguage: {
-    useCookie: false
+    useCookie: false,
+    redirectOn: 'root'
   }
 }

@@ -3,10 +3,11 @@
     <p v-if="difference" class="age-text">
       {{
         $t('java_is_old', {
-          specifier: $tc('time.years', difference.years) + ', '
-            + $tc('time.months', difference.months)
-            + ' ' + $t('and') + ' '
-            + $tc('time.days', difference.days)
+          specifier: enumerate([
+            difference.years >= 1 ? $tc('time.years', difference.years) : null,
+            difference.months >= 1 ? $tc('time.months', difference.months) : null,
+            difference.days >= 1 ? $tc('time.days', difference.days) : null,
+          ])
         })
       }}
     </p>
@@ -27,6 +28,10 @@ import 'moment-precise-range-plugin'
 // https://www.java.com/de/download/help/release_dates.html
 const java8Release = 1395097200000
 
+function notEmpty<TValue>(value: TValue | null | undefined): value is TValue {
+  return value !== null && value !== undefined
+}
+
 export default Vue.extend({
   data () {
     return {
@@ -34,19 +39,35 @@ export default Vue.extend({
     }
   },
 
-  mounted () {
+  created () {
     const current = this.$moment()
-    // TODO: fix this lol
-    // Firefox gives us some weird CORS errors
-    // if (this.$nuxt.isOnline && !navigator.userAgent.toLowerCase().includes('firefox')) {
-    //   const response = await this.$axios.$get('https://worldtimeapi.org/api/ip')
-    //   current = this.$moment(response.unixtime * 1000) // unixtime is actuallx secs but day.js expects millis
-    // } else {
-    // }
+
     const release = this.$moment(java8Release)
     this.$data.difference = this.$moment.preciseDiff(current, release, true)
-  }
+  },
 
+  methods: {
+    enumerate (nullableInputs: (String|null)[]): String {
+      const nonNullableInputs = nullableInputs.filter(notEmpty)
+      let output = ''
+      for (let i = 0; i < nonNullableInputs.length; i++) {
+        if (i > 0) {
+          output += ' '
+          if (i <= nonNullableInputs.length - 2) {
+            output += ', '
+          } else {
+            output += ' '
+            output += this.$t('and')
+            output += ' '
+          }
+        }
+
+        output += nonNullableInputs[i]
+      }
+
+      return output
+    }
+  }
 })
 </script>
 

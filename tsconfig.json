@@ -30,7 +30,7 @@
       "@nuxtjs/moment",
       "@types/moment-precise-range-plugin",
       "@types/node",
-      "nuxt-i18n"
+      "@nuxtjs/i18n"
     ]
   },
   "exclude": [
