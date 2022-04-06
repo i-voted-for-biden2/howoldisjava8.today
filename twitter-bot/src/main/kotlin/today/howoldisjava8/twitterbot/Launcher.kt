@@ -3,8 +3,13 @@ package today.howoldisjava8.twitterbot
 import dev.inmo.krontab.doWhile
 import io.github.redouane59.twitter.TwitterClient
 import io.github.redouane59.twitter.dto.stream.StreamRules
+import io.github.redouane59.twitter.dto.tweet.Tweet
 import io.github.redouane59.twitter.dto.tweet.TweetParameters
+import io.github.redouane59.twitter.dto.tweet.TweetType
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.toList
 import org.slf4j.LoggerFactory
 import today.howoldisjava8.twitterbot.config.Config
 import today.howoldisjava8.twitterbot.core.formatMessage
@@ -48,20 +53,44 @@ suspend fun main() {
     twitter.addFilteredStreamRule("(how java old 8)", "java")
 
     logger.info("Starting Tweet Stream")
-    twitter.startFilteredStream {
-        if (self.id == it.authorId)
+    twitter.startFilteredStream { tweet ->
+        if (self.id == tweet.authorId)
             return@startFilteredStream
         scope.launch {
-            val user = twitter.getUserFromUserId(it.authorId)
-            logger.info("${it.text} - https://twitter.com/${user.name}/status/${it.id}")
+            // great name i know
+            val isThereAReplyFromUs = with(twitter) {
+                tweet.getParentTweets()
+            }.toList().any { it.authorId == self.id }
+            val user = twitter.getUserFromUserId(tweet.authorId)
+            if (isThereAReplyFromUs) {
+                logger.info("IGNORED - https://twitter.com/${user.name}/status/${tweet.id}")
+                return@launch
+            }
+            logger.info("https://twitter.com/${user.name}/status/${tweet.id}")
+            twitter.postTweet(
+                TweetParameters.builder()
+                    .reply(
+                        TweetParameters.Reply.builder()
+                            .inReplyToTweetId(tweet.id)
+                            .build()
+                    )
+                    .text(formatMessage()).build()
+            )
         }
-        twitter.postTweet(TweetParameters.builder()
-            .reply(TweetParameters.Reply.builder()
-                .inReplyToTweetId(it.id)
-                .build())
-            .text(formatMessage()).build())
     }.await()
 }
+
+context(TwitterClient) private suspend inline fun Tweet.getParentTweets(): Flow<Tweet> =
+    withContext(Dispatchers.IO) {
+        flow {
+            var tweet: Tweet = this@getParentTweets
+            while (true) {
+                val parent = tweet.getInReplyToStatusId(TweetType.REPLIED_TO) ?: break
+                tweet = getTweet(parent)
+                emit(tweet)
+            }
+        }
+    }
 
 @OptIn(ExperimentalCoroutinesApi::class)
 private suspend fun <T> Future<T>.await(): T = suspendCancellableCoroutine { cont ->
