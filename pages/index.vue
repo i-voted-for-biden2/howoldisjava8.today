@@ -35,15 +35,17 @@ function notEmpty<TValue> (value: TValue | null | undefined): value is TValue {
 export default Vue.extend({
   data () {
     return {
-      difference: null
+      difference2: null
     }
   },
 
-  created () {
-    const current = this.$moment()
+  computed: {
+    difference () {
+      const current = this.$moment()
 
-    const release = this.$moment(java8Release)
-    this.$data.difference = this.$moment.preciseDiff(current, release, true)
+      const release = this.$moment(java8Release)
+      return this.$moment.preciseDiff(current, release, true)
+    }
   },
 
   methods: {
