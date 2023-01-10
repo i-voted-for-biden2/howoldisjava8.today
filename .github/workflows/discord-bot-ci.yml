@@ -22,7 +22,7 @@ jobs:
           distribution: 'adopt'
           java-version: 11
       - name: Cache Gradle packages
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v3.2.3
         with:
           key: "$GITHUB_SHA"
           path: |
